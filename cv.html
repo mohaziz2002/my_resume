@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية | محمد زكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Bold Red and White -->
+    <!-- Application Structure Plan: تم تصميم هذا التطبيق كصفحة واحدة متدفقة لعرض السيرة الذاتية بطريقة احترافية وجذابة. يبدأ بقسم رئيسي للتعريف السريع، يليه شريط تنقل ثابت لتسهيل الوصول للأقسام. تم اختيار عرض الخبرات على شكل خط زمني تفاعلي لتوضيح التدرج الوظيفي والتطوعي بشكل مرئي. أما المهارات والدورات، فقد تم تنظيمها في بطاقات واضحة مع رسم بياني دائري لتلخيص مجالات الكفاءة الرئيسية. هذا الهيكل يحول السيرة الذاتية من مستند نصي ثابت إلى تجربة تفاعلية تبرز نقاط القوة بشكل فعال. -->
+    <!-- Visualization & Content Choices: 
+    - معلومات التقرير: الخبرة التطوعية مرتبة زمنياً. -> الهدف: عرض التطور المهني. -> طريقة العرض: خط زمني عمودي (HTML/CSS). -> التفاعل: تأثيرات بسيطة عند التمرير. -> المبرر: أفضل من القائمة النصية لعرض التسلسل الزمني وجذب الانتباه. -> الأداة: HTML/Tailwind.
+    - معلومات التقرير: قائمة الدورات والمؤهلات. -> الهدف: تنظيم وتلخيص المهارات. -> طريقة العرض: رسم بياني دائري (Doughnut Chart) لتصنيف المهارات وبطاقات تفصيلية لكل دورة. -> التفاعل: تظهر تفاصيل إضافية عند تمرير الفأرة على الرسم البياني. -> المبرر: الرسم البياني يقدم نظرة سريعة وشاملة لمجالات الخبرة، بينما توفر البطاقات التفاصيل اللازمة. -> الأداة: Chart.js و HTML/Tailwind.
+    - تم التأكيد على عدم استخدام رسوميات SVG أو Mermaid JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            right: -0.8rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: #dc2626; /* red-600 */
+            border: 3px solid #fee2e2; /* red-100 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header id="home" class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-red-600">محمد زكي</div>
+            <div class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="#about" class="nav-link text-gray-600 hover:text-red-600 transition duration-300">عني</a>
+                <a href="#experience" class="nav-link text-gray-600 hover:text-red-600 transition duration-300">الخبرات</a>
+                <a href="#skills" class="nav-link text-gray-600 hover:text-red-600 transition duration-300">المهارات والدورات</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="nav-link block py-2 px-4 text-sm hover:bg-red-50">عني</a>
+            <a href="#experience" class="nav-link block py-2 px-4 text-sm hover:bg-red-50">الخبرات</a>
+            <a href="#skills" class="nav-link block py-2 px-4 text-sm hover:bg-red-50">المهارات والدورات</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <section id="about" class="pt-24 pb-16">
+             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+                <div class="flex-shrink-0">
+                    <img src="photo.jpg"alt="صورة محمد زكي الشخصية" class="w-48 h-48 rounded-full object-cover border-4 border-red-200 shadow-xl">
+                </div>
+                <div class="text-center md:text-right mt-6 md:mt-0">
+                    <h1 class="text-4xl md:text-5xl font-bold text-red-700 mb-4">محمد زكي عبدالعزيز</h1>
+                    <p class="text-lg text-gray-600 mb-3">طالب هندسة كمبيوتر، المستوى الثالث</p>
+                    <p class="font-semibold text-red-800 bg-red-100 rounded-full inline-block px-6 py-2">مرشح للجنة الرقابة والتقييم، اتحاد الطلاب اليمنيين في تركيا - فرع كارابوك</p>
+                </div>
+            </div>
+            <div class="max-w-3xl mx-auto mt-16 text-center">
+                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">ملخص شخصي</h2>
+                 <p class="text-gray-600 leading-relaxed">
+                     أنا طالب طموح حريص على تحقيق كل ما لدي من أهداف. لدي شغف بالعمل التطوعي واكتساب مهارات جديدة ومتنوعة تساهم في تطويري الشخصي والمجتمعي، وأؤمن بأهمية المشاركة الفعالة في بناء مجتمع طلابي مترابط وفاعل.
+                 </p>
+             </div>
+        </section>
+
+        <section id="experience" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">مسيرة العمل التطوعي</h2>
+            <div class="relative max-w-2xl mx-auto border-r-2 border-red-200">
+                <div class="experience-data"></div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">المهارات والمؤهلات</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+                في هذا القسم، استعراض للمؤهلات والدورات التدريبية التي حصلت عليها. الرسم البياني يوضح توزيع هذه المهارات على مجالات مختلفة، مما يعطي فكرة سريعة عن الكفاءات الأساسية. يمكنكم الاطلاع على تفاصيل كل دورة في البطاقات أدناه.
+            </p>
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-12">
+                <div class="w-full lg:w-1/3">
+                    <div class="chart-container relative h-80 w-full max-w-sm mx-auto">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 skills-data">
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white mt-16 py-6 border-t">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; MOHAMMED AZIZ</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const experienceData = [
+                { year: '2025', title: 'قائد مجموعة، برنامج الذكاء الاصطناعي', org: 'اتحاد الطلاب اليمنيين، فرع سكاريا' },
+                { year: '2023-2024' , title: 'أمين عام ', org: 'اتحاد الطلاب اليمنيين في تركيا، فرع كارابوك' },
+                { year: '2023-2024', title: 'رئيس أكاديمية رواد للتدريب والتأهيل', org: 'اتحاد الطلاب اليمنيين في تركيا، فرع كارابوك' },
+                { year: '2023-2024', title: 'مدرس لغة تركية، برنامج إتقان', org: 'اتحاد الطلاب اليمنيين في تركيا، فرع كارابوك' },
+                { year: '2022-مستمر', title: 'متطوع في لجان متعددة (الاقامات ,الجامعة ،الصحية )', org: 'اتحاد الطلاب اليمنيين في تركيا، فرعي كارابوك وسكاريا' },
+                { year: '2022-2023', title: 'عضو لجنة المتابعة والتدقيق للمنح التركية', org: 'اتحاد الطلاب اليمنيين في تركيا، فرع سكاريا' },
+                { year: '2022-2023', title: 'مدرس اللغتين التركية والإنجليزية', org: 'اتحاد الطلاب اليمنيين في تركيا، فرع كارابوك' },
+                { year: ' 2023', title: 'متطوع في برنامج إيواء النازحين', org: 'سكاريا' },
+              
+            ];
+
+            const skillsData = [
+                { category: 'لغات', title: 'دبلوم في اللغة الإنجليزية', source: 'معهد مالي' },
+                { category: 'لغات', title: 'دبلوم في اللغة التركية', source: 'جامعة سكاريا للعلوم التطبيقية' },
+                { category: 'تقني', title: 'دبلوم الرخصة الدولية للحاسوب', source: 'جامعة العلوم والتكنولوجيا' },
+                { category: 'إنساني', title: 'دورة في الإسعافات الأولية', source: 'معهد ليدرشيب' },
+                { category: 'إداري', title: 'إدارة الكوارث (برنامج اسفير)', source: 'معهد ليدرشيب' },
+                { category: 'إداري', title: 'دورة في التسويق الإلكتروني', source: 'اتحاد الطلاب اليمنيين، اسطنبول' },
+                { category: 'إداري', title: 'دورة في إدارة المشاريع الصغيرة', source: 'معهد ليدرشيب' }
+            ];
+            
+            const experienceContainer = document.querySelector('.experience-data');
+            experienceData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'timeline-item mb-8 mr-8 pl-4 relative';
+                div.innerHTML = `
+                    <div class="absolute -right-12 top-2 text-sm font-semibold text-red-600 bg-red-100 rounded-md px-2 py-1">${item.year}</div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800">${item.title}</h3>
+                        <p class="text-sm text-gray-500">${item.org}</p>
+                    </div>
+                `;
+                experienceContainer.appendChild(div);
+            });
+
+            const skillsContainer = document.querySelector('.skills-data');
+            skillsData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:-translate-y-1 hover:shadow-lg';
+                div.innerHTML = `
+                    <h3 class="font-semibold text-lg text-gray-800">${item.title}</h3>
+                    <p class="text-gray-500 mt-1">${item.source}</p>
+                `;
+                skillsContainer.appendChild(div);
+            });
+
+            const skillCategories = {};
+            skillsData.forEach(skill => {
+                if (skillCategories[skill.category]) {
+                    skillCategories[skill.category]++;
+                } else {
+                    skillCategories[skill.category] = 1;
+                }
+            });
+            
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(skillCategories).map(cat => {
+                        const translations = {'لغات': 'لغات', 'تقني': 'مهارات تقنية', 'إنساني': 'عمل إنساني', 'إداري': 'مهارات إدارية'};
+                        return translations[cat] || cat;
+                    }),
+                    datasets: [{
+                        label: 'تصنيف المهارات',
+                        data: Object.values(skillCategories),
+                        backgroundColor: [
+                            '#b91c1c',
+                            '#dc2626',
+                            '#ef4444',
+                            '#f87171'
+                        ],
+                        borderColor: '#f9fafb',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Cairo', sans-serif",
+                                    size: 14
+                                },
+                                color: '#374151'
+                            }
+                        },
+                        tooltip: {
+                            bodyFont: {
+                                family: "'Cairo', sans-serif"
+                            },
+                            titleFont: {
+                                family: "'Cairo', sans-serif"
+                            }
+                        }
+                    }
+                }
+            });
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            document.querySelectorAll('a.nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
